@@ -1,0 +1,122 @@
+<app-navbar></app-navbar>
+<div class="col-lg-4 col-md-6 col-sm-10 form-container offset-lg-4 offset-md-3 offset-sm-1">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-header">
+            <h2>Rejestracja</h2>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input
+                type="text"
+                formControlName="email"
+                class="form-control"
+                placeholder="jan.kowalski@gmail.com"
+                [ngClass]="{ 'is-invalid': submitted && f['email'].errors || emailIsAlreadyTaken }"
+                (ngModelChange)="onChange('email')"
+            />
+            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <div *ngIf="f['email'].errors['required']">Email jest wymagany!</div>
+                <div *ngIf="f['email'].errors['email']">Wpisz poprawny aders email!</div>
+            </div>
+            <div *ngIf="emailIsAlreadyTaken" class="invalid-feedback">
+                <div>Adres email jest już zajęty!</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-6">
+                <label for="firstName">Imię</label>
+                <input
+                    type="text"
+                    formControlName="firstName"
+                    
+                    class="form-control"
+                    placeholder="Jan"
+                    [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
+                />
+                <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                    <div *ngIf="f['firstName'].errors['required']">Imię jest wymagane!</div>
+                    <div *ngIf="f['firstName'].errors['minlength']">Imię musi mieć co najmniej 3 litery!</div>
+                    <div *ngIf="f['firstName'].errors['maxlength']">Imię nie może przekraczać 20 liter!</div>
+                    <div *ngIf="f['firstName'].errors['pattern'] && (!f['firstName'].errors['minlength'] && !f['firstName'].errors['maxlength'])">
+                        Imię może składać się jedynie z dużych oraz małych liter!</div>
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label for="lastName">Nazwisko</label>
+                <input
+                    type="text"
+                    formControlName="lastName"
+                    class="form-control"
+                    placeholder="Kowalski"
+                    [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+                />
+                <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                    <div *ngIf="f['lastName'].errors['required']">Nazwisko jest wymagane!</div>
+                    <div *ngIf="f['lastName'].errors['minlength']">Nazwisko musi mieć co najmniej 3 litery!</div>
+                    <div *ngIf="f['lastName'].errors['maxlength']">Nazwisko nie może przekraczać 20 liter!</div>
+                    <div *ngIf="f['lastName'].errors['pattern'] && (!f['lastName'].errors['minlength'] && !f['lastName'].errors['maxlength'])">
+                        Nazwisko może składać się jedynie z dużych oraz małych liter!</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="username">Nazwa użytkownika</label>
+            <input
+                type="text"
+                formControlName="username"
+                class="form-control"
+                placeholder="jan.kowalski"
+                [ngClass]="{ 'is-invalid': submitted && f['username'].errors || usernameIsAlreadyTaken }"
+                (ngModelChange)="onChange('username')"
+                autocomplete="username"
+            />
+            <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                <div *ngIf="f['username'].errors['required']">Nazwa użytkownika jest wymagana!</div>
+                <div *ngIf="f['username'].errors['minlength']">Nazwa użytkownika musi mieć co najmniej 6 liter!</div>
+                <div *ngIf="f['username'].errors['maxlength']">Nazwa użytkownika nie może przekraczać 20 liter!</div>    
+            </div>
+            <div *ngIf="usernameIsAlreadyTaken" class="invalid-feedback">
+                <div>Nazwa użytkownika jest już zajęta!</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-6">
+                <label for="password">Hasło</label>
+                <input
+                    type="password"
+                    formControlName="password"
+                    class="form-control"
+                    placeholder="********"
+                    [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+                    autocomplete="new-password"
+                />
+                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                    <div *ngIf="f['password'].errors['required']">Hasło jest wymagane!</div>
+                    <div *ngIf="f['password'].errors['minlength']">Hasło musi mieć co najmniej 6 liter!</div>
+                    <div *ngIf="f['password'].errors['maxlength']">Hasło nie może przekraczać 40 liter!</div>    
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label for="confirmPassword">Powtórz hasło</label>
+                <input
+                    type="password"
+                    formControlName="confirmPassword"
+                    class="form-control"
+                    placeholder="********"
+                    [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors && f['password'].valid }"
+                    autocomplete="confirm-password"
+                />
+                <div *ngIf="submitted && f['confirmPassword'].errors && !f['password'].errors" class="invalid-feedback">
+                    <div *ngIf="f['confirmPassword'].errors['required']">Potwierdzenie hasła jest wymagane!</div>
+                    <div *ngIf="f['confirmPassword'].errors['matching']">Hasa muszą być takie same!</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-button-container">
+            <button type="submit" class="btn btn-secondary">Zarejestruj</button>
+        </div>
+        <div class="form-footer">
+            <span>Posiadasz już konto? <a routerLink="/login" routerLinkActive="active"><u>Zaloguj się!</u></a></span>
+        </div>
+    </form>
+</div>

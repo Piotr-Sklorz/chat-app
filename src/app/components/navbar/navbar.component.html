@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand navbar-light bg-light nav-container">
+  <a class="navbar-brand" href="/home">Chat App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item dropdown" *ngIf="username">
+            <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{username}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" [routerLink]="['/home', {outlets:{'friends':['show']}}]"><fa-icon [icon]="faHome"  class="small"></fa-icon>&nbsp;Strona główna</a>
+                <a class="dropdown-item" [routerLink]="['/settings']"><fa-icon [icon]="faCog" class="small"></fa-icon>&nbsp;Ustawienia</a>
+                <li><hr class="dropdown-divider"></li>
+                <a class="dropdown-item" (click)="logout()"><fa-icon [icon]="faPowerOff"  class="small"></fa-icon>&nbsp;Wyloguj</a>
+            </div>
+        </li>
+    </ul>
+  </div>
+</nav>

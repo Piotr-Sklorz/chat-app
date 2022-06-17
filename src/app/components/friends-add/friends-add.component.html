@@ -1,0 +1,45 @@
+<div class="friends-list-container">
+  <h6 *ngIf="hasInvitations">Zaproszenia do znajomych:</h6>
+  <ul *ngIf="hasInvitations">
+    <li *ngFor="let user of invitationsList" class="targetable">
+      <div class="row">
+        <div class="col-11">
+          <span><b>{{user.user.firstName}}&nbsp;{{user.user.lastName}}</b></span><br>
+          <span class="small"><i>{{user.user.username}}</i></span>
+        </div>
+        <div class="col-1 dropdown p-0">
+          <fa-icon class="targetable asdf" [icon]="faEllipsisV" id="dropdownMenuButton" ></fa-icon>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+          *ngIf="!user.isMyRequest">
+            <a class="dropdown-item add" (click)="acceptInvitation(user.user)">Zaakcepyuj zaproszenie</a>
+            <a class="dropdown-item delete" (click)="removeInvitation(user.user.email)">Odrzuć zaproszenie</a>
+          </div>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+          *ngIf="user.isMyRequest">
+            <a class="dropdown-item delete" (click)="removeInvitation(user.user.email)"><span>Anuluj wysłanie zaproszenia do znajomych</span></a>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <hr class="dropdown-divider" *ngIf="hasInvitations">
+  <div class="friends-list-content">
+  <h6>Osoby, które możesz poznać:</h6>
+  <ul>
+    <li *ngFor="let user of usersList" class="targetable">
+      <div class="row">
+        <div class="col-11">
+          <span><b>{{user.firstName}}&nbsp;{{user.lastName}}</b></span><br>
+          <span class="small"><i>{{user.username}}</i></span>
+        </div>
+        <div class="col-1 dropdown p-0">
+          <fa-icon class="targetable small" [icon]="faEllipsisV" id="dropdownMenuButton" ></fa-icon>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item add" (click)="sendInvitation(user)">Wyślij zaproszenie do znajomych</a>
+            <a class="dropdown-item delete" (click)="removeFromUsersList(user.email)">Usuń z listy</a>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

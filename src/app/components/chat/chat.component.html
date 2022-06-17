@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="chat-header">
+    <span>{{selectedUser?.username}}</span>
+  </div>
+  <div class="chat-content p-0 m-0">
+    <ul class="row p-0 m-0 chat-list">
+      <div>
+        <li *ngFor="let message of messages" class="row"
+        [ngClass]="message.sender === currentUser?.username ? 'toRight' : 'toLeft'">
+          <h6>
+            {{message.sender}}
+          </h6>
+          <div class="message-container col-lg-5 col-md-5 col-sm-12"
+          [ngClass]="message.sender === currentUser?.username ? 'offset-lg-7 offset-md-7' : ''">
+            {{message.message}}
+          </div>
+        </li>
+      </div>
+    </ul>
+    <div class="row chat-send" style="width: 100%;">
+      <div class="col-10">
+        <input type="text" class="form-control" [(ngModel)]="messageText">
+      </div>
+      <button type="submit" class="col-2 btn btn-success pull-right" (click)="sendMessage()"><fa-icon [icon]="faPaperPlane"></fa-icon></button>
+    </div>
+  </div>
+</div>

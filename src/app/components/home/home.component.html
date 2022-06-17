@@ -1,0 +1,23 @@
+<app-navbar [username]="currentUser.username"></app-navbar>
+<div class="row container-fluid">
+  <div class="col-lg-4 col-md-4 col-sm-6 left-sidebar">
+    <div class="row header-container">
+      <button class="col-lg-6 col-md-4 col-sm-4 col-xs-12"
+      [ngClass]="isShowRoute ? 'on-active' : ''"
+      [routerLink]="['/home', {outlets:{'friends':['show']}}]">
+        Znajomi
+      </button>
+      <button class="col" aria-pressed="true"
+      [ngClass]="!isShowRoute ? 'on-active' : ''"
+      [routerLink]="['/home', {outlets:{'friends':['add']}}]">
+        Znajź znajomych
+      </button>
+    </div>
+    <div class="row">
+      <router-outlet name="friends" (activate)="onOutletLoaded($event)"></router-outlet>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-6 p-0">
+    <app-chat [selectedUser]="selectedUser"  [currentUser]="currentUser"></app-chat>
+  </div>  
+</div>

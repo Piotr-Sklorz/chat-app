@@ -1,0 +1,20 @@
+<div class="friends-list-container">
+  <ul>
+    <li *ngFor="let user of friendsList" class="targetable">
+      <div class="row">
+        <div class="col-11">
+          <div class="choosable" (click)="selectedUserChange(user)">
+            <span><b>{{user.firstName}}&nbsp;{{user.lastName}}</b></span><br>
+            <span class="small"><i>{{user.username}}</i></span>
+          </div>
+        </div>
+        <div class="col-1 dropdown p-0" *ngIf="user.email !== currentUser.email">
+          <fa-icon class="targetable asdf" [icon]="faEllipsisV" id="dropdownMenuButton" ></fa-icon>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item delete" (click)="removeFriend(user.email)">Usuń znajomego</a>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
